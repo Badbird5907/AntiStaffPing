@@ -27,9 +27,6 @@ public class AntiStaffPing {
     @Getter
     private static final ScheduledExecutorService threadPool = Executors.newSingleThreadScheduledExecutor();
 
-    @Getter
-    private static int users = -1;
-
     @SneakyThrows
     public static void main(String[] args) {
         Configuration.load();
