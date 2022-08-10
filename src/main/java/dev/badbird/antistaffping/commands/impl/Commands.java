@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.entities.Role;
 
 import java.util.stream.Collectors;
 
-public class ManageRolesCommand {
+public class Commands {
     @Command(name = "show", description = "Shows info about the no ping roles & users, and the exempted roles", permission = {Permission.MANAGE_SERVER})
     public void show(@Sender Member member, CommandContext ctx, ServerConfig cfg) {
         cfg.checkNull();

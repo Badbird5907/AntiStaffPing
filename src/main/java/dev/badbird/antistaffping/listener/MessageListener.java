@@ -55,20 +55,20 @@ public class MessageListener extends ListenerAdapter {
                 if (cfg.isDeleteOriginalMessage()) {
                     event.getMessage().delete().queue();
                     event.getChannel().sendMessage(cfg.getMessage().replace("<user>", author.getAsMention())).queue(msg -> {
-                        if (cfg.isDeleteSentMessage()) {
+                        if (cfg.isDeleteReplyMessage()) {
                             msg.delete().queueAfter(cfg.getDeleteMessageDelay(), TimeUnit.MILLISECONDS);
                         }
                     });
                 } else {
                     event.getMessage().reply(cfg.getMessage().replace("<user>", author.getAsMention())).queue(msg -> {
-                        if (cfg.isDeleteSentMessage()) {
+                        if (cfg.isDeleteReplyMessage()) {
                             msg.delete().queueAfter(cfg.getDeleteMessageDelay(), TimeUnit.MILLISECONDS);
                         }
                     });
                 }
 
                 if (cfg.isTimeoutUser()) {
-                    event.getMember().timeoutFor(Duration.ofMillis(cfg.getTimeoutTime())).queue();
+                    event.getMember().timeoutFor(Duration.ofMillis(cfg.getTimeoutDuration())).queue();
                 }
             }
             return null;

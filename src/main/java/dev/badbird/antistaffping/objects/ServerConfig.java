@@ -23,8 +23,8 @@ public class ServerConfig {
     private List<Long> noPingUsers = new ArrayList<>();
     private List<Long> exemptRoles = new ArrayList<>();
     private String message = "<user> Please do not ping staff members.";
-    private boolean deleteOriginalMessage = false, deleteSentMessage = false, timeoutUser = false;
-    private long deleteMessageDelay = Duration.ofSeconds(10).toMillis(), timeoutTime = Duration.ofMinutes(5).toMillis(), lastMessagedRequirement = Duration.ofMinutes(2).toMillis();
+    private boolean deleteOriginalMessage = false, deleteReplyMessage = false, timeoutUser = false;
+    private long deleteMessageDelay = Duration.ofSeconds(10).toMillis(), timeoutDuration = Duration.ofMinutes(5).toMillis(), lastMessagedRequirement = Duration.ofMinutes(2).toMillis();
 
     private long maxRoleSize = 20;
 
@@ -107,10 +107,10 @@ public class ServerConfig {
                 ", exemptRoles=" + exemptRoles +
                 ", message='" + message + '\'' +
                 ", deleteOriginalMessage=" + deleteOriginalMessage +
-                ", deleteSentMessage=" + deleteSentMessage +
+                ", deleteSentMessage=" + deleteReplyMessage +
                 ", timeoutUser=" + timeoutUser +
                 ", deleteMessageDelay=" + deleteMessageDelay +
-                ", timeoutTime=" + timeoutTime +
+                ", timeoutTime=" + timeoutDuration +
                 ", lastMessagedRequirement=" + lastMessagedRequirement +
                 ", maxRoleSize=" + maxRoleSize +
                 '}';
