@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.guild.GuildAvailableEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -98,7 +99,13 @@ public class MessageListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
-        System.out.println("Joined guild: " + event.getGuild().getName());
+        System.out.println("(1) Joined guild: " + event.getGuild().getName());
+        AntiStaffPing.registerCommands();
+    }
+
+    @Override
+    public void onGuildAvailable(@NotNull GuildAvailableEvent event) {
+        System.out.println("(2) Guild available: " + event.getGuild().getName());
         AntiStaffPing.registerCommands();
     }
 }
