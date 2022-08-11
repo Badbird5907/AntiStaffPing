@@ -98,6 +98,7 @@ public class MessageListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
+        System.out.println("Joined guild: " + event.getGuild().getName());
         AntiStaffPing.registerCommands();
     }
 }
