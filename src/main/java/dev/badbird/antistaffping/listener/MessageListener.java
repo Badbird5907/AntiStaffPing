@@ -3,10 +3,12 @@ package dev.badbird.antistaffping.listener;
 import dev.badbird.antistaffping.AntiStaffPing;
 import dev.badbird.antistaffping.objects.Configuration;
 import dev.badbird.antistaffping.objects.ServerConfig;
+import net.badbird5907.jdacommand.JDACommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -92,5 +94,10 @@ public class MessageListener extends ListenerAdapter {
                     .setColor(Color.CYAN)
                     .build()).setEphemeral(true).queue();
         }
+    }
+
+    @Override
+    public void onGuildJoin(@NotNull GuildJoinEvent event) {
+        AntiStaffPing.registerCommands();
     }
 }

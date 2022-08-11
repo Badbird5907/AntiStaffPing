@@ -47,10 +47,7 @@ public class AntiStaffPing {
             }
 
         command.registerProvider(new ServerConfigProvider());
-
-        command.registerCommand(new Commands());
-        command.registerCommand(new SettingsCommands());
-
+        registerCommands();
         //command.pruneUnusedCommands();
         //command.registerCommandsInPackage("dev.badbird.antistaffping.commands.impl");
 
@@ -61,6 +58,19 @@ public class AntiStaffPing {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             Configuration.getInstance().getStorageProvider().disable();
         }, "Shutdown Thread"));
+    }
 
+    public static void registerCommands() { // Hacky way to fix problems in JDA that i haven't fixed yet
+        JDACommand.getCommandMap().clear();
+        JDACommand.getInstance().registerCommand(new Commands());
+        JDACommand.getInstance().registerCommand(new SettingsCommands());
+        for (Guild guild : jda.getGuilds()) {
+            guild.retrieveCommands().queue(commands -> {
+                for (net.dv8tion.jda.api.interactions.commands.Command cmd : commands) {
+                    if (JDACommand.getCommandMap().containsKey(cmd.getName().toLowerCase())) continue;
+                    cmd.delete().queue();
+                }
+            });
+        }
     }
 }
