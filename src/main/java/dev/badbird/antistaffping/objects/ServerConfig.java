@@ -49,6 +49,13 @@ public class ServerConfig {
 
     public CompletableFuture<Boolean> shouldRespond(Message message) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
+        if (message.getReferencedMessage() != null) {
+            try {
+                return future;
+            } finally {
+                future.complete(false);
+            }
+        }
         Mentions mentions = message.getMentions();
         for (Member member : mentions.getMembers()) {
             if (noPingUsers.contains(member.getIdLong())) {
